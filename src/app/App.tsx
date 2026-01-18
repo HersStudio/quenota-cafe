@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { ArrowLeft, Check } from 'lucide-react';
-import imgBrand from "figma:asset/965f050b21f22d942aec90675ac7589cde10f869.png";
-import imgProduct from "figma:asset/1a31ae0403fa4c82d521a75f8d733a675a23f6b0.png";
+// Imágenes de la marca Qué Nota (Cloudinary)
+const imgBrand = "https://res.cloudinary.com/dwpz6ygs0/image/upload/f_png/cs_srgb/q_auto/dpr_auto/logo-que-nota_wwm1jj.jpg";
+const imgProduct = "https://res.cloudinary.com/dwpz6ygs0/image/upload/f_jpg/cs_srgb/q_auto/dpr_auto/cafe-chiroso_kztm4p.jpg";
 
 interface OrderData {
   size: '250g' | '500g' | null;
