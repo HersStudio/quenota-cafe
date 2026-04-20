@@ -1,7 +1,9 @@
+import image_237da3dee3ae12b13b13dd5e870e2ac0ba3753ec from 'figma:asset/237da3dee3ae12b13b13dd5e870e2ac0ba3753ec.png'
 import React, { useState } from 'react';
 import { ArrowLeft, Check } from 'lucide-react';
-// Imágenes de la marca Qué Nota (Cloudinary)
-const imgBrand = "https://res.cloudinary.com/dwpz6ygs0/image/upload/f_png/cs_srgb/q_auto/dpr_auto/logo-que-nota_wwm1jj.jpg";
+
+// Imágenes de la marca Qué Nota
+const imgBrand = image_237da3dee3ae12b13b13dd5e870e2ac0ba3753ec;
 const imgProduct = "https://res.cloudinary.com/dwpz6ygs0/image/upload/f_jpg/cs_srgb/q_auto/dpr_auto/cafe-chiroso_kztm4p.jpg";
 
 interface OrderData {
@@ -102,8 +104,14 @@ export default function App() {
       <div className="min-h-dvh bg-[#f2e8e0]">
         {/* Header Desktop */}
         <div className="hidden lg:block bg-[#f2e8e0] border-b border-[#c86a3a]">
-          <div className="max-w-[1200px] mx-auto px-8 py-6">
-            <h1 className="text-[32px] font-bold text-[#b75929] text-center">QUÉ NOTA</h1>
+          <div className="max-w-[1200px] mx-auto px-8 py-6 flex justify-center">
+            <div className="w-[240px] h-[46px]">
+              <img 
+                src={image_237da3dee3ae12b13b13dd5e870e2ac0ba3753ec} 
+                alt="Qué Nota" 
+                className="w-full h-full object-contain"
+              />
+            </div>
           </div>
         </div>
 
@@ -136,9 +144,7 @@ export default function App() {
               <div>
                 {/* Product Title con Badge de stock */}
                 <div className="flex items-center gap-2 mb-4">
-                  <h2 className="text-[24px] font-bold text-[#c86a3a] leading-[32px]">
-                    VARIEDAD CHIROSO
-                  </h2>
+                  <h2 className="text-[24px] font-bold text-[#c86a3a] leading-[32px]">LA BUENA VIDA</h2>
                   <div className="bg-[#f2e8e0] border border-[#b75929] px-2 py-1 rounded-[6px]">
                     <p className="text-[12px] font-bold text-[#1e1e1e]">Quedan 24 Und</p>
                   </div>
@@ -153,7 +159,7 @@ export default function App() {
 
                 {/* Features List */}
                 <div className="text-[14px] text-[#1e1e1e] leading-[20px] mb-6 space-y-1">
-                  <p>✓ Acidez media</p>
+                  <p>✓ Acidez baja</p>
                   <p>✓ Tostado artesanal en pequeños lotes</p>
                   <p>✓ Frescura garantizada</p>
                 </div>
@@ -441,8 +447,14 @@ export default function App() {
       <div className="min-h-dvh bg-[#f2e8e0] lg:bg-[#f2e8e0]">
         {/* Header Desktop */}
         <div className="hidden lg:block bg-[#f2e8e0] border-b border-[#c86a3a]">
-          <div className="max-w-[1200px] mx-auto px-8 py-6">
-            <h1 className="text-[32px] font-bold text-[#b75929] text-center">QUÉ NOTA</h1>
+          <div className="max-w-[1200px] mx-auto px-8 py-6 flex justify-center">
+            <div className="w-[240px] h-[46px]">
+              <img 
+                src={imgBrand} 
+                alt="Qué Nota" 
+                className="w-full h-full object-contain"
+              />
+            </div>
           </div>
         </div>
 
@@ -693,8 +705,14 @@ export default function App() {
       <div className="min-h-dvh bg-[#f2e8e0]">
         {/* Header Desktop */}
         <div className="hidden lg:block bg-[#f2e8e0] border-b border-[#c86a3a]">
-          <div className="max-w-[1200px] mx-auto px-8 py-6">
-            <h1 className="text-[32px] font-bold text-[#b75929] text-center">QUÉ NOTA</h1>
+          <div className="max-w-[1200px] mx-auto px-8 py-6 flex justify-center">
+            <div className="w-[240px] h-[46px]">
+              <img 
+                src={imgBrand} 
+                alt="Qué Nota" 
+                className="w-full h-full object-contain"
+              />
+            </div>
           </div>
         </div>
 
@@ -1091,8 +1109,14 @@ export default function App() {
       <div className="min-h-dvh bg-[#f2e8e0]">
         {/* Header Desktop */}
         <div className="hidden lg:block bg-[#f2e8e0] border-b border-[#c86a3a]">
-          <div className="max-w-[1200px] mx-auto px-8 py-6">
-            <h1 className="text-[32px] font-bold text-[#b75929] text-center">QUÉ NOTA</h1>
+          <div className="max-w-[1200px] mx-auto px-8 py-6 flex justify-center">
+            <div className="w-[240px] h-[46px]">
+              <img 
+                src={imgBrand} 
+                alt="Qué Nota" 
+                className="w-full h-full object-contain"
+              />
+            </div>
           </div>
         </div>
 
