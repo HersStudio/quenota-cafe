@@ -1,4 +1,4 @@
-import image_237da3dee3ae12b13b13dd5e870e2ac0ba3753ec from 'figma:asset/237da3dee3ae12b13b13dd5e870e2ac0ba3753ec.png'
+import image_237da3dee3ae12b13b13dd5e870e2ac0ba3753ec from '../assets/237da3dee3ae12b13b13dd5e870e2ac0ba3753ec.png'
 import React, { useState } from 'react';
 import { ArrowLeft, Check } from 'lucide-react';
 
