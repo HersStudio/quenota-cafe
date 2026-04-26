@@ -519,27 +519,29 @@ export default function PurchasePanel({
 
   return (
     <>
-      {/* Backdrop */}
+      {/* Backdrop — only covers the right half on desktop */}
       <div
         className="fixed inset-0 z-40 transition-opacity"
         style={{
-          backgroundColor: 'rgba(0,0,0,0.5)',
           opacity: isVisible ? 1 : 0,
           transitionDuration: '350ms',
         }}
         onClick={handleClose}
       />
 
-      {/* Panel */}
+      {/* Panel — overlays the right half of the screen */}
       <div
-        className="fixed top-0 right-0 z-50 h-full w-full lg:w-[520px] p-6 lg:p-8 flex flex-col overflow-hidden transition-transform"
+        className="fixed z-50 top-0 right-0 bottom-0 w-full lg:w-1/2 flex items-stretch justify-end transition-transform"
         style={{
-          backgroundColor: '#B75929',
           transform: isVisible ? 'translateX(0)' : 'translateX(100%)',
           transitionDuration: '350ms',
           transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
         }}
       >
+        <div
+          className="w-full lg:m-4 lg:rounded-[16px] p-6 lg:p-8 flex flex-col overflow-y-auto"
+          style={{ backgroundColor: '#B75929' }}
+        >
         {step === 1 && (
           <Step1Gramaje
             orderData={orderData}
@@ -586,6 +588,7 @@ export default function PurchasePanel({
             onEditPayment={() => setStep(4)}
           />
         )}
+        </div>
       </div>
     </>
   );
