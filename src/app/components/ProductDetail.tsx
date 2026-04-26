@@ -1,5 +1,4 @@
 import React from 'react';
-import { ArrowLeft } from 'lucide-react';
 import type { Product } from '../App';
 import imgBrand from '../../assets/237da3dee3ae12b13b13dd5e870e2ac0ba3753ec.png';
 
@@ -11,27 +10,38 @@ interface ProductDetailProps {
 
 function CharacteristicsTable({ product }: { product: Product }) {
   const rows = [
-    ['Región', product.characteristics.region],
-    ['Altura', product.characteristics.altitude],
-    ['Variedad', product.characteristics.variety],
-    ['Procesamiento', product.characteristics.processing],
-    ['Perfil Sensorial', product.characteristics.sensoryProfile],
-    ['Acidez', product.characteristics.acidity],
-    ['Puntaje Catador', product.characteristics.cuppingScore],
+    ['REGIÓN', product.characteristics.region],
+    ['ALTURA', product.characteristics.altitude],
+    ['VARIEDAD', product.characteristics.variety],
+    ['PROCESAMIENTO', product.characteristics.processing],
+    ['PERFIL SENSORIAL', product.characteristics.sensoryProfile],
+    ['ACIDEZ', product.characteristics.acidity],
+    ['PUNTAJE CATADOR', product.characteristics.cuppingScore],
   ];
 
   return (
-    <div className="border rounded-[8px] overflow-hidden" style={{ borderColor: '#C86A3A' }}>
+    <div>
       {rows.map(([label, value], i) => (
         <div
           key={label}
-          className={`flex items-center justify-between px-4 py-3 ${i < rows.length - 1 ? 'border-b' : ''}`}
-          style={{ borderColor: '#C86A3A' }}
+          className="flex items-start justify-between py-4"
+          style={{ borderTop: '1px solid rgba(30,30,30,0.15)' }}
         >
-          <span className="text-[14px] font-bold" style={{ color: '#1E1E1E' }}>{label}</span>
-          <span className="text-[14px]" style={{ color: '#6A7282' }}>{value}</span>
+          <span
+            className="text-[13px] font-bold uppercase tracking-[0.05em] shrink-0 w-[45%]"
+            style={{ color: '#1E1E1E' }}
+          >
+            {label}
+          </span>
+          <span
+            className="text-[14px] text-right uppercase"
+            style={{ color: '#1E1E1E' }}
+          >
+            {value}
+          </span>
         </div>
       ))}
+      <div style={{ borderTop: '1px solid rgba(30,30,30,0.15)' }} />
     </div>
   );
 }
@@ -39,41 +49,52 @@ function CharacteristicsTable({ product }: { product: Product }) {
 function InfoSection() {
   const items = [
     { icon: 'calendar', label: 'Pedidos', value: 'Lunes a Miércoles' },
-    { icon: 'truck', label: 'Entregas', value: 'Solo en Barranquilla' },
-    { icon: 'box', label: 'Despachos', value: 'Todos los viernes' },
+    { icon: 'location', label: 'Entregas', value: 'Barranquilla y Soledad' },
+    { icon: 'truck', label: 'Despachos', value: 'Viernes y Sábado' },
   ];
 
   return (
-    <div className="border rounded-[8px] p-4 space-y-3" style={{ borderColor: '#1E1E1E' }}>
-      <h3 className="text-[16px] font-bold" style={{ color: '#1E1E1E' }}>Ten en cuenta</h3>
-      {items.map(({ icon, label, value }) => (
-        <div key={label} className="flex items-center gap-3">
-          {icon === 'calendar' && (
-            <svg className="w-[18px] h-[18px] shrink-0" fill="none" viewBox="0 0 18 18">
-              <path d="M5.25 1.5V3.75M12.75 1.5V3.75" stroke="#B75929" strokeLinecap="square" strokeWidth="1.67" />
-              <path d="M15.75 3H2.25V16.5H15.75V3Z" stroke="#B75929" strokeLinecap="square" strokeWidth="1.25" />
-              <path d="M2.25 7.5H15.75" stroke="#B75929" strokeLinecap="square" strokeWidth="1.25" />
-            </svg>
-          )}
-          {icon === 'truck' && (
-            <svg className="w-[18px] h-[18px] shrink-0" fill="none" viewBox="0 0 18 18">
-              <path d="M9 9.75a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z" stroke="#B75929" strokeWidth="1.25" />
-              <path d="M14.25 7.5c0 4.5-5.25 8.25-5.25 8.25S3.75 12 3.75 7.5a5.25 5.25 0 0110.5 0z" stroke="#B75929" strokeWidth="1.25" />
-            </svg>
-          )}
-          {icon === 'box' && (
-            <svg className="w-[18px] h-[18px] shrink-0" fill="none" viewBox="0 0 24 24">
-              <path d="M1 8h11v8H1V8z" stroke="#B75929" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M12 8h4l3 3v5h-7V8z" stroke="#B75929" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              <circle cx="5.5" cy="18.5" r="2" stroke="#B75929" strokeWidth="1.5" />
-              <circle cx="16.5" cy="18.5" r="2" stroke="#B75929" strokeWidth="1.5" />
-            </svg>
-          )}
-          <p className="text-[14px]" style={{ color: '#1E1E1E' }}>
-            <span className="font-bold">{label}:</span> {value}
-          </p>
-        </div>
-      ))}
+    <div>
+      <h2
+        className="text-[24px] lg:text-[30px] font-bold uppercase mb-2"
+        style={{ color: '#1E1E1E' }}
+      >
+        TEN EN CUENTA
+      </h2>
+      <p className="text-[14px] mb-6" style={{ color: '#6A7282' }}>
+        Para que tu café llegue fresco y en su mejor punto, trabajamos así:
+      </p>
+
+      <div className="space-y-4">
+        {items.map(({ icon, label, value }) => (
+          <div key={label} className="flex items-center gap-3">
+            {icon === 'calendar' && (
+              <svg className="w-[20px] h-[20px] shrink-0" fill="none" viewBox="0 0 20 20">
+                <path d="M6 1.5V4.5M14 1.5V4.5" stroke="#C86A3A" strokeLinecap="square" strokeWidth="1.5" />
+                <rect x="2" y="3.5" width="16" height="15" rx="1" stroke="#C86A3A" strokeWidth="1.5" />
+                <path d="M2 8.5H18" stroke="#C86A3A" strokeWidth="1.5" />
+              </svg>
+            )}
+            {icon === 'location' && (
+              <svg className="w-[20px] h-[20px] shrink-0" fill="none" viewBox="0 0 20 20">
+                <path d="M10 10.75a2.5 2.5 0 100-5 2.5 2.5 0 000 5z" stroke="#C86A3A" strokeWidth="1.5" />
+                <path d="M16 8.5c0 5-6 9.5-6 9.5s-6-4.5-6-9.5a6 6 0 0112 0z" stroke="#C86A3A" strokeWidth="1.5" />
+              </svg>
+            )}
+            {icon === 'truck' && (
+              <svg className="w-[20px] h-[20px] shrink-0" fill="none" viewBox="0 0 22 18">
+                <path d="M1 3h10v9H1V3z" stroke="#C86A3A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M11 6h4l3 3v3h-7V6z" stroke="#C86A3A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                <circle cx="5" cy="14" r="2" stroke="#C86A3A" strokeWidth="1.5" />
+                <circle cx="15" cy="14" r="2" stroke="#C86A3A" strokeWidth="1.5" />
+              </svg>
+            )}
+            <p className="text-[15px]" style={{ color: '#1E1E1E' }}>
+              <span className="font-bold">{label}:</span> {value}
+            </p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -81,57 +102,76 @@ function InfoSection() {
 export default function ProductDetail({ product, onBack, onStartPurchase }: ProductDetailProps) {
   return (
     <div className="min-h-dvh" style={{ backgroundColor: '#F2E8E0' }}>
-      {/* Header */}
-      <header className="border-b lg:block" style={{ borderColor: '#C86A3A' }}>
-        <div className="max-w-[1200px] mx-auto px-6 lg:px-8 py-5 lg:py-6 flex justify-center">
-          <img src={imgBrand} alt="Qué Nota Café" className="h-[38px] lg:h-[46px] object-contain" />
-        </div>
-      </header>
-
-      {/* Desktop: 50/50 layout */}
-      <div className="max-w-[1200px] mx-auto">
-        <div className="lg:grid lg:grid-cols-2 min-h-[calc(100dvh-80px)]">
-          {/* Left: Image */}
-          <div className="relative h-[300px] lg:h-auto lg:min-h-[calc(100dvh-80px)]" style={{ backgroundColor: '#1E1E1E' }}>
+      {/* Full-width 50/50 layout */}
+      <div className="lg:grid lg:grid-cols-2 min-h-dvh">
+        {/* Left: black background with image + header */}
+        <div className="relative" style={{ backgroundColor: '#1E1E1E' }}>
+          {/* Header on left side */}
+          <div className="absolute top-0 left-0 right-0 z-20 px-6 lg:px-10 py-6 lg:py-8 flex items-center justify-between">
             <img
-              src={product.image}
-              alt={product.name}
-              className="w-full h-full object-cover"
+              src={imgBrand}
+              alt="Qué Nota Café"
+              className="h-[36px] lg:h-[44px] object-contain"
+              style={{ filter: 'brightness(0) invert(1)' }}
             />
-            <div className="absolute top-4 left-4">
-              <span className="inline-block text-[12px] font-bold px-3 py-1 rounded-full" style={{ backgroundColor: '#1E1E1E', color: '#34c759' }}>
-                {product.stock > 0 ? `Quedan ${product.stock} Und` : 'Sin stock'}
-              </span>
-            </div>
           </div>
 
-          {/* Right: Content */}
-          <div className="px-6 lg:px-10 py-8 lg:py-10 overflow-y-auto" style={{ backgroundColor: '#F2E8E0' }}>
-            {product.isSpecialEdition && (
-              <p className="text-[12px] font-bold uppercase tracking-[0.1em] mb-2" style={{ color: '#C86A3A' }}>
-                {product.subtitle}
-              </p>
-            )}
+          {/* Seal */}
+          {product.isSpecialEdition && (
+            <div className="absolute z-10 top-[15%] right-[5%] lg:top-[12%] lg:right-[8%]">
+              <img
+                src="/images/sello-edicion-especial-2.png"
+                alt="Edición Especial de Temporada"
+                className="animate-spin-slow w-[100px] h-[100px] lg:w-[140px] lg:h-[140px]"
+              />
+            </div>
+          )}
 
-            <h1 className="text-[30px] lg:text-[36px] font-bold leading-[36px] lg:leading-[40px] mb-4" style={{ color: '#1E1E1E' }}>
+          {/* Product image */}
+          <div className="h-[350px] lg:h-full lg:min-h-dvh flex items-end">
+            <img
+              src="/images/quenotacafe-bourbon-rosado-2.png"
+              alt={product.name}
+              className="w-full h-full object-cover object-center"
+            />
+          </div>
+        </div>
+
+        {/* Right: cream content */}
+        <div
+          className="flex flex-col overflow-y-auto"
+          style={{ backgroundColor: '#F2E8E0' }}
+        >
+          {/* Header tagline on right side */}
+          <div className="px-6 lg:px-10 py-6 lg:py-8 flex items-center justify-end">
+            <p
+              className="text-[14px] font-bold uppercase tracking-[0.1em]"
+              style={{ color: '#C86A3A' }}
+            >
+              CAFÉ FRESCO
+            </p>
+          </div>
+
+          {/* Content */}
+          <div className="flex-1 px-6 lg:px-10 pb-8">
+            <h1
+              className="text-[30px] lg:text-[36px] font-bold leading-[36px] lg:leading-[40px] mb-6"
+              style={{ color: '#1E1E1E' }}
+            >
               {product.name}
             </h1>
 
-            <p className="text-[16px] leading-[24px] mb-8" style={{ color: '#6A7282' }}>
-              {product.description}
-            </p>
-
             <CharacteristicsTable product={product} />
 
-            <div className="mt-8">
+            <div className="mt-10">
               <InfoSection />
             </div>
 
             {/* CTAs */}
-            <div className="flex gap-4 mt-8 pb-8">
+            <div className="flex gap-4 mt-10 pb-4">
               <button
                 onClick={onBack}
-                className="flex-1 text-[14px] font-bold uppercase tracking-[0.05em] py-4 rounded-[8px] border-2 transition-colors"
+                className="flex-1 text-[14px] font-bold uppercase tracking-[0.05em] py-4 rounded-full border-2 transition-colors"
                 style={{ borderColor: '#1E1E1E', color: '#1E1E1E', backgroundColor: 'transparent' }}
                 onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#1E1E1E'; e.currentTarget.style.color = '#F2E8E0'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#1E1E1E'; }}
@@ -140,7 +180,7 @@ export default function ProductDetail({ product, onBack, onStartPurchase }: Prod
               </button>
               <button
                 onClick={onStartPurchase}
-                className="flex-1 text-[14px] font-bold uppercase tracking-[0.05em] py-4 rounded-[8px] transition-colors"
+                className="flex-1 text-[14px] font-bold uppercase tracking-[0.05em] py-4 rounded-full transition-colors"
                 style={{ backgroundColor: '#C86A3A', color: '#F2E8E0' }}
                 onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#1E1E1E')}
                 onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#C86A3A')}
