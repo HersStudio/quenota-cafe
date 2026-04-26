@@ -30,30 +30,30 @@ function StockBadge({ stock }: { stock: number }) {
 
 function SpecialEditionSeal() {
   return (
-    <div className="absolute z-20 -left-[65px] lg:-left-[80px] top-[55%] -translate-y-1/2 pointer-events-none">
-      <div className="animate-spin-slow w-[160px] h-[160px] lg:w-[200px] lg:h-[200px]">
-        <svg viewBox="0 0 200 200" className="w-full h-full overflow-visible">
+    <div className="absolute z-20 -left-[75px] lg:-left-[95px] top-[58%] -translate-y-1/2 pointer-events-none">
+      <div className="animate-spin-slow w-[170px] h-[170px] lg:w-[210px] lg:h-[210px]">
+        <svg viewBox="0 0 210 210" className="w-full h-full overflow-visible">
           <defs>
             <path
               id="sealTextPath"
-              d="M 100,100 m -78,0 a 78,78 0 1,1 156,0 a 78,78 0 1,1 -156,0"
+              d="M 105,105 m -82,0 a 82,82 0 1,1 164,0 a 82,82 0 1,1 -164,0"
             />
           </defs>
           <text
             fill="#C86A3A"
-            fontSize="13.5"
+            fontSize="14"
             fontWeight="700"
-            letterSpacing="2.5"
+            letterSpacing="0.5"
           >
             <textPath href="#sealTextPath" startOffset="0%">
-              TEMPORADA  EDICIÓN  ESPECIAL  DE
+              TEMPORADA EDICIÓN ESPECIAL DE
             </textPath>
           </text>
           <text
-            x="100"
-            y="118"
+            x="105"
+            y="128"
             textAnchor="middle"
-            fontSize="72"
+            fontSize="100"
             fontWeight="900"
             fill="#00B5A3"
           >
