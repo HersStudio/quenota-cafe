@@ -10,6 +10,7 @@ export interface Product {
   id: string;
   name: string;
   subtitle: string;
+  origin: string;
   description: string;
   image: string;
   stock: number;
@@ -45,20 +46,42 @@ const PRODUCTS: Product[] = [
     id: 'bourbon-rosado',
     name: 'BOURBON ROSADO',
     subtitle: 'Edición Especial de Temporada',
+    origin: 'Caicedonia, Valle del Cauca',
     description: 'Café exótico con notas cítricas vibrantes y una acidez sutil que lo hacen único. Cada sorbo revela una complejidad de sabores que evoca las montañas colombianas, donde tradición y pasión por el cultivo se encuentran.',
     image: 'https://res.cloudinary.com/dwpz6ygs0/image/upload/f_jpg/cs_srgb/q_auto/dpr_auto/cafe-chiroso_kztm4p.jpg',
-    stock: 24,
-    price250: 25000,
-    price500: 45000,
+    stock: 30,
+    price250: 47900,
+    price500: 85000,
     isSpecialEdition: true,
     characteristics: {
-      region: 'Huila, Colombia',
+      region: 'Caicedonia, Valle del Cauca',
       altitude: '1.800 msnm',
       variety: 'Bourbon Rosado',
       processing: 'Lavado',
       sensoryProfile: 'Cítrico, floral, miel',
       acidity: 'Media',
       cuppingScore: '86 pts',
+    },
+  },
+  {
+    id: 'regional-del-valle',
+    name: 'REGIONAL DEL VALLE',
+    subtitle: '',
+    origin: 'Caicedonia, Valle del Cauca',
+    description: 'Un café regional con cuerpo medio, notas a chocolate y caramelo, y un final suave y balanceado. Perfecto para el día a día.',
+    image: 'https://res.cloudinary.com/dwpz6ygs0/image/upload/f_jpg/cs_srgb/q_auto/dpr_auto/cafe-chiroso_kztm4p.jpg',
+    stock: 30,
+    price250: 39900,
+    price500: 72000,
+    isSpecialEdition: false,
+    characteristics: {
+      region: 'Caicedonia, Valle del Cauca',
+      altitude: '1.650 msnm',
+      variety: 'Regional',
+      processing: 'Lavado',
+      sensoryProfile: 'Chocolate, caramelo, suave',
+      acidity: 'Baja',
+      cuppingScore: '83 pts',
     },
   },
 ];
