@@ -11,8 +11,8 @@ function StockBadge({ stock }: { stock: number }) {
   if (stock <= 0) {
     return (
       <span
-        className="inline-block text-[13px] font-bold px-3 py-[5px] border"
-        style={{ borderColor: '#D1D5DC', color: '#6A7282' }}
+        className="inline-block text-[13px] font-bold px-3 py-[5px]"
+        style={{ backgroundColor: '#D1D5DC', color: '#6A7282' }}
       >
         Sin stock
       </span>
@@ -20,8 +20,8 @@ function StockBadge({ stock }: { stock: number }) {
   }
   return (
     <span
-      className="inline-block text-[13px] font-bold px-3 py-[5px] border"
-      style={{ borderColor: '#1E1E1E', color: '#1E1E1E' }}
+      className="inline-block text-[13px] font-bold px-3 py-[5px]"
+      style={{ backgroundColor: '#1E1E1E', color: '#F2E8E0' }}
     >
       Quedan {stock} Und
     </span>
@@ -30,35 +30,32 @@ function StockBadge({ stock }: { stock: number }) {
 
 function SpecialEditionSeal() {
   return (
-    <div className="absolute -left-10 top-1/2 -translate-y-1/2 z-10 lg:-left-12">
-      <div className="animate-spin-slow w-[120px] h-[120px] lg:w-[150px] lg:h-[150px]">
-        <svg viewBox="0 0 150 150" className="w-full h-full">
+    <div className="absolute z-20 -left-[50px] lg:-left-[60px] top-[55%] -translate-y-1/2 pointer-events-none">
+      <div className="animate-spin-slow w-[130px] h-[130px] lg:w-[160px] lg:h-[160px]">
+        <svg viewBox="0 0 160 160" className="w-full h-full overflow-visible">
           <defs>
             <path
-              id="sealCircle"
-              d="M 75,75 m -52,0 a 52,52 0 1,1 104,0 a 52,52 0 1,1 -104,0"
+              id="sealTextPath"
+              d="M 80,80 m -58,0 a 58,58 0 1,1 116,0 a 58,58 0 1,1 -116,0"
             />
           </defs>
-          {/* Outer ring text */}
           <text
             fill="#C86A3A"
-            fontSize="12"
+            fontSize="11.5"
             fontWeight="700"
-            letterSpacing="3.5"
-            textAnchor="middle"
+            letterSpacing="4"
           >
-            <textPath href="#sealCircle" startOffset="50%">
+            <textPath href="#sealTextPath" startOffset="0%">
               TEMPORADA EDICIÓN ESPECIAL DE
             </textPath>
           </text>
-          {/* Center asterisk */}
           <text
-            x="75"
-            y="85"
+            x="80"
+            y="95"
             textAnchor="middle"
-            fontSize="48"
+            fontSize="56"
             fontWeight="900"
-            fill="#2ECDA7"
+            fill="#00B5A3"
           >
             ✳
           </text>
@@ -70,12 +67,11 @@ function SpecialEditionSeal() {
 
 function DecorativeBlob() {
   return (
-    <div className="absolute -right-6 bottom-4 z-0 w-[100px] h-[120px] lg:w-[120px] lg:h-[140px] pointer-events-none">
-      <svg viewBox="0 0 120 140" fill="none" className="w-full h-full">
+    <div className="absolute -right-4 lg:-right-6 top-[40%] z-0 w-[90px] h-[130px] lg:w-[110px] lg:h-[160px] pointer-events-none">
+      <svg viewBox="0 0 110 160" fill="none" className="w-full h-full">
         <path
-          d="M60 0C90 0 120 30 120 70C120 110 90 140 60 140C30 140 0 110 0 80C0 50 30 0 60 0Z"
-          fill="#C86A3A"
-          opacity="0.5"
+          d="M30 0C65 5 110 40 105 85C100 130 70 155 40 160C15 155 0 130 5 95C10 55 0 -5 30 0Z"
+          fill="#F5A623"
         />
       </svg>
     </div>
@@ -85,11 +81,9 @@ function DecorativeBlob() {
 function ProductCard({
   product,
   onClick,
-  index,
 }: {
   product: Product;
   onClick: () => void;
-  index: number;
 }) {
   const formatPrice = (price: number) => {
     return '$' + price.toLocaleString('es-CO');
@@ -97,21 +91,21 @@ function ProductCard({
 
   return (
     <div className="relative cursor-pointer group" onClick={onClick}>
-      {/* Special edition seal - only on first product if applicable */}
+      {/* Special edition seal — outside left of image */}
       {product.isSpecialEdition && <SpecialEditionSeal />}
 
-      {/* Decorative blob on non-special products */}
+      {/* Decorative blob — behind right of image for non-special */}
       {!product.isSpecialEdition && <DecorativeBlob />}
 
       {/* Product image */}
       <div
-        className="relative overflow-hidden mb-5 aspect-[4/5]"
+        className="relative overflow-visible mb-5 aspect-[4/5]"
         style={{ backgroundColor: '#1E1E1E' }}
       >
         <img
           src={product.image}
           alt={product.name}
-          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+          className="relative z-10 w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
           style={{ opacity: product.stock <= 0 ? 0.5 : 1 }}
         />
       </div>
@@ -149,7 +143,7 @@ function ProductCard({
         </div>
 
         <button
-          className="w-[48px] h-[48px] rounded-full flex items-center justify-center shrink-0 transition-colors duration-200"
+          className="relative z-10 w-[48px] h-[48px] rounded-full flex items-center justify-center shrink-0 transition-colors duration-200"
           style={{ backgroundColor: '#C86A3A' }}
           onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#1E1E1E')}
           onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#C86A3A')}
@@ -182,7 +176,7 @@ export default function CatalogScreen({
   onProductClick,
 }: CatalogScreenProps) {
   return (
-    <div className="min-h-dvh" style={{ backgroundColor: '#F2E8E0' }}>
+    <div className="min-h-dvh overflow-x-hidden" style={{ backgroundColor: '#F2E8E0' }}>
       {/* Header */}
       <header className="max-w-[1200px] mx-auto px-6 lg:px-10 py-6 lg:py-8 flex items-center justify-between">
         <img
@@ -207,12 +201,11 @@ export default function CatalogScreen({
               : 'grid-cols-1 lg:grid-cols-2'
           }`}
         >
-          {products.map((product, i) => (
+          {products.map((product) => (
             <ProductCard
               key={product.id}
               product={product}
               onClick={() => onProductClick(product)}
-              index={i}
             />
           ))}
         </div>
