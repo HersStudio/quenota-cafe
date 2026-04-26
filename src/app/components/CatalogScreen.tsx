@@ -42,7 +42,7 @@ function SpecialEditionSeal() {
 
 function DecorativeBlob() {
   return (
-    <div className="absolute -right-16 lg:-right-24 top-[20%] z-0 w-[180px] h-[280px] lg:w-[240px] lg:h-[360px] pointer-events-none">
+    <div className="absolute -right-20 lg:-right-32 top-[20%] z-0 w-[180px] h-[280px] lg:w-[240px] lg:h-[360px] pointer-events-none">
       <img
         src="/images/decorativo-regional.png"
         alt=""
