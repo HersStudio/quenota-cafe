@@ -21,11 +21,11 @@ function CharacteristicsTable({ product }: { product: Product }) {
 
   return (
     <div>
-      {rows.map(([label, value], i) => (
+      {rows.map(([label, value]) => (
         <div
           key={label}
           className="flex items-start justify-between py-4"
-          style={{ borderTop: '1px solid rgba(30,30,30,0.15)' }}
+          style={{ borderBottom: '2px solid #1E1E1E' }}
         >
           <span
             className="text-[13px] font-bold uppercase tracking-[0.05em] shrink-0 w-[45%]"
@@ -41,7 +41,6 @@ function CharacteristicsTable({ product }: { product: Product }) {
           </span>
         </div>
       ))}
-      <div style={{ borderTop: '1px solid rgba(30,30,30,0.15)' }} />
     </div>
   );
 }
@@ -102,12 +101,10 @@ function InfoSection() {
 export default function ProductDetail({ product, onBack, onStartPurchase }: ProductDetailProps) {
   return (
     <div className="min-h-dvh" style={{ backgroundColor: '#F2E8E0' }}>
-      {/* Full-width 50/50 layout */}
-      <div className="lg:grid lg:grid-cols-2 min-h-dvh">
-        {/* Left: black background with image + header */}
-        <div className="relative" style={{ backgroundColor: '#1E1E1E' }}>
-          {/* Header on left side */}
-          <div className="absolute top-0 left-0 right-0 z-20 px-6 lg:px-10 py-6 lg:py-8 flex items-center justify-between">
+      <div className="lg:grid lg:grid-cols-2 lg:h-dvh">
+        {/* Left: black background, fixed height, image centered */}
+        <div className="relative lg:h-dvh" style={{ backgroundColor: '#1E1E1E' }}>
+          <div className="absolute top-0 left-0 right-0 z-20 px-6 lg:px-10 py-6 lg:py-8">
             <img
               src={imgBrand}
               alt="Qué Nota Café"
@@ -116,7 +113,6 @@ export default function ProductDetail({ product, onBack, onStartPurchase }: Prod
             />
           </div>
 
-          {/* Seal */}
           {product.isSpecialEdition && (
             <div className="absolute z-10 top-[15%] right-[5%] lg:top-[12%] lg:right-[8%]">
               <img
@@ -127,23 +123,21 @@ export default function ProductDetail({ product, onBack, onStartPurchase }: Prod
             </div>
           )}
 
-          {/* Product image */}
-          <div className="h-[350px] lg:h-full lg:min-h-dvh flex items-end">
+          <div className="h-[350px] lg:h-dvh flex items-center justify-center">
             <img
               src="/images/quenotacafe-bourbon-rosado-2.png"
               alt={product.name}
-              className="w-full h-full object-cover object-center"
+              className="w-full h-full object-contain"
             />
           </div>
         </div>
 
-        {/* Right: cream content */}
+        {/* Right: cream content, scrollable, sticky footer */}
         <div
-          className="flex flex-col overflow-y-auto"
+          className="lg:h-dvh lg:overflow-y-auto flex flex-col"
           style={{ backgroundColor: '#F2E8E0' }}
         >
-          {/* Header tagline on right side */}
-          <div className="px-6 lg:px-10 py-6 lg:py-8 flex items-center justify-end">
+          <div className="px-6 lg:px-10 py-6 lg:py-8 flex items-center justify-end shrink-0">
             <p
               className="text-[14px] font-bold uppercase tracking-[0.1em]"
               style={{ color: '#C86A3A' }}
@@ -152,8 +146,7 @@ export default function ProductDetail({ product, onBack, onStartPurchase }: Prod
             </p>
           </div>
 
-          {/* Content */}
-          <div className="flex-1 px-6 lg:px-10 pb-8">
+          <div className="flex-1 px-6 lg:px-10">
             <h1
               className="text-[30px] lg:text-[36px] font-bold leading-[36px] lg:leading-[40px] mb-6"
               style={{ color: '#1E1E1E' }}
@@ -166,9 +159,14 @@ export default function ProductDetail({ product, onBack, onStartPurchase }: Prod
             <div className="mt-10">
               <InfoSection />
             </div>
+          </div>
 
-            {/* CTAs */}
-            <div className="flex gap-4 mt-10 pb-4">
+          {/* Sticky CTA footer */}
+          <div
+            className="sticky bottom-0 px-6 lg:px-10 py-6 shrink-0"
+            style={{ backgroundColor: '#F2E8E0' }}
+          >
+            <div className="flex gap-4">
               <button
                 onClick={onBack}
                 className="flex-1 text-[14px] font-bold uppercase tracking-[0.05em] py-4 rounded-full border-2 transition-colors"
