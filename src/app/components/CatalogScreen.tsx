@@ -31,36 +31,11 @@ function StockBadge({ stock }: { stock: number }) {
 function SpecialEditionSeal() {
   return (
     <div className="absolute z-20 -left-[75px] lg:-left-[95px] top-[58%] -translate-y-1/2 pointer-events-none">
-      <div className="animate-spin-slow w-[170px] h-[170px] lg:w-[210px] lg:h-[210px]">
-        <svg viewBox="0 0 210 210" className="w-full h-full overflow-visible">
-          <defs>
-            <path
-              id="sealTextPath"
-              d="M 105,105 m -82,0 a 82,82 0 1,1 164,0 a 82,82 0 1,1 -164,0"
-            />
-          </defs>
-          <text
-            fill="#C86A3A"
-            fontSize="14"
-            fontWeight="700"
-            letterSpacing="0.5"
-          >
-            <textPath href="#sealTextPath" startOffset="0%">
-              TEMPORADA EDICIÓN ESPECIAL DE
-            </textPath>
-          </text>
-          <text
-            x="105"
-            y="128"
-            textAnchor="middle"
-            fontSize="100"
-            fontWeight="900"
-            fill="#00B5A3"
-          >
-            ✳
-          </text>
-        </svg>
-      </div>
+      <img
+        src="/images/sello-edicion-especial.png"
+        alt="Edición Especial de Temporada"
+        className="animate-spin-slow w-[170px] h-[170px] lg:w-[210px] lg:h-[210px]"
+      />
     </div>
   );
 }
@@ -68,12 +43,11 @@ function SpecialEditionSeal() {
 function DecorativeBlob() {
   return (
     <div className="absolute -right-8 lg:-right-12 top-[25%] z-0 w-[140px] h-[220px] lg:w-[180px] lg:h-[280px] pointer-events-none">
-      <svg viewBox="0 0 180 280" fill="none" className="w-full h-full">
-        <path
-          d="M90 0C140 10 180 60 175 120C170 180 150 210 120 245C95 270 55 280 30 250C5 220 -10 170 10 120C30 70 40 -10 90 0Z"
-          fill="#E29E4B"
-        />
-      </svg>
+      <img
+        src="/images/decorativo-regional.png"
+        alt=""
+        className="w-full h-full object-contain"
+      />
     </div>
   );
 }
