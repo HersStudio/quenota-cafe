@@ -147,7 +147,7 @@ function Step1Gramaje({
       <StepHeader step={1} totalSteps={5} onBack={onBack} />
       <div className="flex-1 overflow-y-auto">
         <h2 className="text-[36px] lg:text-[40px] font-bold text-white mb-4 leading-[40px] lg:leading-[48px]">
-          Gramaje
+          GRAMAJE
         </h2>
         <p className="text-[16px] text-white/90 mb-8 leading-[24px]">
           Elige la cantidad de café según cuánto tomas y para cuántas personas es.
@@ -188,7 +188,7 @@ function Step2Molienda({
       <StepHeader step={2} totalSteps={5} onBack={onBack} />
       <div className="flex-1 overflow-y-auto">
         <h2 className="text-[36px] lg:text-[40px] font-bold text-white mb-4 leading-[40px] lg:leading-[48px]">
-          Molienda
+          MOLIENDA
         </h2>
         <p className="text-[16px] text-white/90 mb-8 leading-[24px]">
           Elige cómo prefieres tu café según la forma en que lo preparas.
@@ -244,7 +244,7 @@ function Step3Address({
       <StepHeader step={3} totalSteps={5} onBack={onBack} />
       <div className="flex-1 overflow-y-auto">
         <h2 className="text-[36px] lg:text-[40px] font-bold text-white mb-4 leading-[40px] lg:leading-[48px]">
-          Dirección de entrega
+          DIRECCIÓN DE ENTREGA
         </h2>
         <p className="text-[16px] text-white/90 mb-8 leading-[24px]">
           ¿A dónde te llevamos tu café?
@@ -261,6 +261,7 @@ function Step3Address({
             >
               <option value="">Selecciona tu ciudad</option>
               <option value="Barranquilla">Barranquilla</option>
+              <option value="Soledad">Soledad</option>
             </select>
             <p className="text-[12px] text-white/60 mt-1">En el momento entregamos a nivel local.</p>
           </div>
@@ -325,7 +326,7 @@ function Step4Payment({
       <StepHeader step={4} totalSteps={5} onBack={onBack} />
       <div className="flex-1 overflow-y-auto">
         <h2 className="text-[36px] lg:text-[40px] font-bold text-white mb-4 leading-[40px] lg:leading-[48px]">
-          Método de pago
+          MÉTODO DE PAGO
         </h2>
         <p className="text-[16px] text-white/90 mb-8 leading-[24px]">
           ¿Cómo prefieres pagar tu café?
@@ -387,9 +388,12 @@ function Step5Summary({
     <div className="flex flex-col h-full">
       <StepHeader step={5} totalSteps={5} onBack={onBack} />
       <div className="flex-1 overflow-y-auto">
-        <h2 className="text-[36px] lg:text-[40px] font-bold text-white mb-8 leading-[40px] lg:leading-[48px]">
-          Resumen
+        <h2 className="text-[36px] lg:text-[40px] font-bold text-white mb-3 leading-[40px] lg:leading-[48px]">
+          QUÉ NOTA ESTE RESUMEN
         </h2>
+        <p className="text-[16px] text-white/90 mb-8 leading-[24px]">
+          Revisa tu pedido antes de finalizar.
+        </p>
 
         {/* Product card */}
         <div className="rounded-[12px] p-4 mb-6" style={{ backgroundColor: '#1E1E1E' }}>
