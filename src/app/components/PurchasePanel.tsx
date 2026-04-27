@@ -117,7 +117,7 @@ function ContinueButton({
     <button
       onClick={onClick}
       disabled={disabled}
-      className="w-full text-[14px] font-bold uppercase tracking-[0.05em] py-4 rounded-[8px] transition-colors"
+      className="w-full text-[14px] font-bold uppercase tracking-[0.05em] py-4 rounded-full transition-colors"
       style={{
         backgroundColor: disabled ? 'rgba(30,30,30,0.4)' : '#1E1E1E',
         color: '#FFFFFF',
@@ -425,8 +425,9 @@ function Step5Summary({
                   {orderData.quantity}
                 </div>
                 <button
-                  onClick={() => setOrderData((d) => ({ ...d, quantity: d.quantity + 1 }))}
-                  className="w-9 h-8 flex items-center justify-center text-white text-[18px] hover:bg-white/10 transition-colors"
+                  onClick={() => setOrderData((d) => ({ ...d, quantity: Math.min(30, d.quantity + 1) }))}
+                  disabled={orderData.quantity >= 30}
+                  className="w-9 h-8 flex items-center justify-center text-white text-[18px] hover:bg-white/10 transition-colors disabled:opacity-30"
                 >
                   +
                 </button>
@@ -474,7 +475,7 @@ function Step5Summary({
       {isOnline ? (
         <button
           onClick={() => { /* MercadoPago — se configura después */ }}
-          className="w-full text-[14px] font-bold uppercase tracking-[0.05em] py-4 rounded-[8px] transition-colors"
+          className="w-full text-[14px] font-bold uppercase tracking-[0.05em] py-4 rounded-full transition-colors"
           style={{ backgroundColor: '#1E1E1E', color: '#FFFFFF' }}
           onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#2D2D2D')}
           onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#1E1E1E')}
@@ -484,7 +485,7 @@ function Step5Summary({
       ) : (
         <button
           onClick={onWhatsApp}
-          className="w-full text-[14px] font-bold uppercase tracking-[0.05em] py-4 rounded-[8px] transition-colors"
+          className="w-full text-[14px] font-bold uppercase tracking-[0.05em] py-4 rounded-full transition-colors"
           style={{ backgroundColor: '#1E1E1E', color: '#FFFFFF' }}
           onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#2D2D2D')}
           onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#1E1E1E')}
