@@ -91,7 +91,7 @@ function ProductCard({
         {product.name}
       </h3>
 
-      <p className="text-[15px] mb-3" style={{ color: '#6A7282' }}>
+      <p className="text-[15px] mb-3" style={{ color: '#1E1E1E' }}>
         {product.origin}
       </p>
 

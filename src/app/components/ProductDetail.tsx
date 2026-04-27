@@ -60,7 +60,7 @@ function InfoSection() {
       >
         TEN EN CUENTA
       </h2>
-      <p className="text-[14px] mb-6" style={{ color: '#6A7282' }}>
+      <p className="text-[14px] mb-6" style={{ color: '#1E1E1E' }}>
         Para que tu café llegue fresco y en su mejor punto, trabajamos así:
       </p>
 
