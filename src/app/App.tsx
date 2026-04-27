@@ -13,6 +13,7 @@ export interface Product {
   origin: string;
   description: string;
   image: string;
+  detailImage: string;
   stock: number;
   price250: number;
   price500: number;
@@ -49,6 +50,7 @@ const PRODUCTS: Product[] = [
     origin: 'Caicedonia, Valle del Cauca',
     description: 'Café exótico con notas cítricas vibrantes y una acidez sutil que lo hacen único. Cada sorbo revela una complejidad de sabores que evoca las montañas colombianas, donde tradición y pasión por el cultivo se encuentran.',
     image: '/images/quenotacafe-bourbon-rosado.png',
+    detailImage: '/images/quenotacafe-bourbon-rosado-2.png',
     stock: 30,
     price250: 47900,
     price500: 85000,
@@ -70,18 +72,19 @@ const PRODUCTS: Product[] = [
     origin: 'Caicedonia, Valle del Cauca',
     description: 'Un café regional con cuerpo medio, notas a chocolate y caramelo, y un final suave y balanceado. Perfecto para el día a día.',
     image: '/images/quenotacafe-regional-del-valle.png',
+    detailImage: '/images/quenotacafe-regional-del-valle-2.png',
     stock: 30,
     price250: 39900,
     price500: 72000,
     isSpecialEdition: false,
     characteristics: {
-      region: 'Caicedonia, Valle del Cauca',
-      altitude: '1.650 msnm',
-      variety: 'Regional',
+      region: 'Caicedonia, Valle del Cauca, Colombia',
+      altitude: '1.650 MSNM',
+      variety: 'Regional del Valle',
       processing: 'Lavado',
-      sensoryProfile: 'Chocolate, caramelo, suave',
-      acidity: 'Baja',
-      cuppingScore: '83 pts',
+      sensoryProfile: 'Nueces, Panela, Chocolate, Caramelo, Almendras, Frutos Rojos',
+      acidity: 'Cítrica Suave',
+      cuppingScore: '83.25',
     },
   },
 ];

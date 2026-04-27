@@ -125,7 +125,7 @@ export default function ProductDetail({ product, onBack, onStartPurchase }: Prod
 
           <div className="h-[350px] lg:h-dvh flex items-center justify-center">
             <img
-              src="/images/quenotacafe-bourbon-rosado-2.png"
+              src={product.detailImage}
               alt={product.name}
               className="w-full h-full object-contain"
             />
