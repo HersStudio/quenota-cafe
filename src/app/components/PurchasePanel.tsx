@@ -425,8 +425,8 @@ function Step5Summary({
                   {orderData.quantity}
                 </div>
                 <button
-                  onClick={() => setOrderData((d) => ({ ...d, quantity: Math.min(30, d.quantity + 1) }))}
-                  disabled={orderData.quantity >= 30}
+                  onClick={() => setOrderData((d) => ({ ...d, quantity: Math.min(product.stock, d.quantity + 1) }))}
+                  disabled={orderData.quantity >= product.stock}
                   className="w-9 h-8 flex items-center justify-center text-white text-[18px] hover:bg-white/10 transition-colors disabled:opacity-30"
                 >
                   +
