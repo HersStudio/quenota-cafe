@@ -23,6 +23,12 @@ export default function OutOfStockModal({ onClose, onOrder }: OutOfStockModalPro
           <X className="w-5 h-5" style={{ color: '#1E1E1E' }} />
         </button>
 
+        <img
+          src="/images/image-OutOfStockModal.png"
+          alt=""
+          className="w-[180px] h-auto mb-6"
+        />
+
         <h2 className="text-[24px] lg:text-[30px] font-bold leading-[32px] lg:leading-[36px] mb-4" style={{ color: '#1E1E1E' }}>
           Se nos fue volando, pero puedes pedirlo.
         </h2>
@@ -33,7 +39,7 @@ export default function OutOfStockModal({ onClose, onOrder }: OutOfStockModalPro
 
         <button
           onClick={onOrder}
-          className="w-full text-[14px] font-bold uppercase tracking-[0.05em] py-4 rounded-[8px] transition-colors"
+          className="w-full text-[14px] font-bold uppercase tracking-[0.05em] py-4 rounded-full transition-colors"
           style={{ backgroundColor: '#C86A3A', color: '#F2E8E0' }}
           onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#1E1E1E')}
           onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#C86A3A')}
