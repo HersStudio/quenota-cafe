@@ -128,6 +128,27 @@ export default function App() {
           }),
         );
       });
+
+    const channel = supabase
+      .channel('productos-stock')
+      .on(
+        'postgres_changes',
+        { event: 'UPDATE', schema: 'public', table: 'productos' },
+        (payload) => {
+          const { nombre, stock } = payload.new as { nombre: string; stock: number };
+          const productId = NOMBRE_TO_ID[nombre];
+          if (productId) {
+            setProducts((prev) =>
+              prev.map((p) => (p.id === productId ? { ...p, stock } : p)),
+            );
+          }
+        },
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, []);
 
   useEffect(() => {
