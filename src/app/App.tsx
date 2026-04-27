@@ -97,6 +97,26 @@ const DEFAULT_PRODUCTS: Product[] = [
 
 const WHATSAPP_PHONE = '573209028644';
 
+const DIAS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'] as const;
+const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'] as const;
+
+function getNextDispatchDate(): string {
+  const today = new Date();
+  const day = today.getDay();
+  const daysUntil: Record<number, number> = {
+    0: 5, // domingo → viernes
+    1: 4, // lunes → viernes
+    2: 3, // martes → viernes
+    3: 2, // miércoles → viernes
+    4: 1, // jueves → viernes
+    5: 1, // viernes → sábado
+    6: 6, // sábado → viernes siguiente
+  };
+  const target = new Date(today);
+  target.setDate(today.getDate() + daysUntil[day]);
+  return `${DIAS[target.getDay()]} ${target.getDate()} de ${MESES[target.getMonth()]}`;
+}
+
 export default function App() {
   const [products, setProducts] = useState<Product[]>(DEFAULT_PRODUCTS);
   const [screen, setScreen] = useState<Screen>('intro');
@@ -104,6 +124,7 @@ export default function App() {
   const [showPurchasePanel, setShowPurchasePanel] = useState(false);
   const [purchaseStep, setPurchaseStep] = useState(1);
   const [outOfStockProduct, setOutOfStockProduct] = useState<Product | null>(null);
+  const [isNextDispatch, setIsNextDispatch] = useState(false);
   const [orderData, setOrderData] = useState<OrderData>({
     size: null,
     grindType: null,
@@ -177,6 +198,7 @@ export default function App() {
     if (outOfStockProduct) {
       setSelectedProduct(outOfStockProduct);
       setOutOfStockProduct(null);
+      setIsNextDispatch(true);
       setScreen('detail');
     }
   }, [outOfStockProduct]);
@@ -185,6 +207,7 @@ export default function App() {
     setSelectedProduct(null);
     setShowPurchasePanel(false);
     setPurchaseStep(1);
+    setIsNextDispatch(false);
     setOrderData({
       size: null, grindType: null, quantity: 1,
       city: '', address: '', neighborhood: '', details: '',
@@ -220,8 +243,12 @@ export default function App() {
   const handleWhatsAppClick = () => {
     const grindLabel = getGrindLabel(orderData.grindType);
     const sizeLabel = orderData.size === '250g' ? '250g' : '500g';
+    const dispatchHeader = isNextDispatch
+      ? `🗓️ PEDIDO PRÓXIMO DESPACHO\n📅 Entrega estimada: ${getNextDispatchDate()}\n\n`
+      : '';
     const message = encodeURIComponent(
       `Hola! 👋 Quiero confirmar mi pedido de QUÉ NOTA:\n\n` +
+      dispatchHeader +
       `☕ ${selectedProduct?.name}\n` +
       `📦 Gramaje: ${sizeLabel}${orderData.quantity > 1 ? ` x ${orderData.quantity}` : ''}\n` +
       `🔪 Molienda: ${grindLabel}\n` +
