@@ -33,7 +33,7 @@ export default function OutOfStockModal({ onClose, onOrder }: OutOfStockModalPro
           Se nos fue volando, pero puedes pedirlo.
         </h2>
 
-        <p className="text-[16px] leading-[24px] mb-8" style={{ color: '#6A7282' }}>
+        <p className="text-[16px] leading-[24px] mb-8" style={{ color: '#1E1E1E' }}>
           Este café se agotó, pero puedes pedirlo ahora y te lo entregamos en el próximo despacho (viernes o sábado).
         </p>
 
