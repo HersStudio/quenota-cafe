@@ -369,6 +369,7 @@ function Step5Summary({
   onWhatsApp,
   onEditAddress,
   onEditPayment,
+  onEditProduct,
 }: {
   product: Product;
   orderData: OrderData;
@@ -380,6 +381,7 @@ function Step5Summary({
   onWhatsApp: () => void;
   onEditAddress: () => void;
   onEditPayment: () => void;
+  onEditProduct: () => void;
 }) {
   const paymentLabels: Record<string, string> = { breb: 'Bre-B', efectivo: 'Efectivo', online: 'Pago en línea' };
   const isOnline = orderData.paymentMethod === 'online';
@@ -402,7 +404,12 @@ function Step5Summary({
               <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="text-[16px] font-bold text-white mb-1">{product.name}</h3>
+              <div className="flex items-start justify-between">
+                <h3 className="text-[16px] font-bold text-white mb-1">{product.name}</h3>
+                <button onClick={onEditProduct} className="ml-2 shrink-0 p-1" aria-label="Editar producto">
+                  <Pencil className="w-4 h-4 text-white/60 hover:text-white transition-colors" />
+                </button>
+              </div>
               <p className="text-[14px] text-white/80">
                 {orderData.size === '250g' ? '250g' : '500g'} · {getGrindLabel(orderData.grindType)}
               </p>
@@ -590,6 +597,7 @@ export default function PurchasePanel({
             onWhatsApp={onWhatsApp}
             onEditAddress={() => setStep(3)}
             onEditPayment={() => setStep(4)}
+            onEditProduct={() => setStep(1)}
           />
         )}
         </div>
