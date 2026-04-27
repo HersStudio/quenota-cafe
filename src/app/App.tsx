@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import imgBrand from '../assets/237da3dee3ae12b13b13dd5e870e2ac0ba3753ec.png';
+import { supabase } from '../lib/supabase';
 import IntroScreen from './components/IntroScreen';
 import CatalogScreen from './components/CatalogScreen';
 import ProductDetail from './components/ProductDetail';
@@ -42,7 +43,12 @@ export interface OrderData {
 
 export type Screen = 'intro' | 'catalog' | 'detail' | 'purchase';
 
-const PRODUCTS: Product[] = [
+const NOMBRE_TO_ID: Record<string, string> = {
+  'Bourbon Rosado': 'bourbon-rosado',
+  'Regional del Valle': 'regional-del-valle',
+};
+
+const DEFAULT_PRODUCTS: Product[] = [
   {
     id: 'bourbon-rosado',
     name: 'BOURBON ROSADO',
@@ -92,6 +98,7 @@ const PRODUCTS: Product[] = [
 const WHATSAPP_PHONE = '573209028644';
 
 export default function App() {
+  const [products, setProducts] = useState<Product[]>(DEFAULT_PRODUCTS);
   const [screen, setScreen] = useState<Screen>('intro');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [showPurchasePanel, setShowPurchasePanel] = useState(false);
@@ -107,6 +114,30 @@ export default function App() {
     details: '',
     paymentMethod: null,
   });
+
+  useEffect(() => {
+    supabase
+      .from('productos')
+      .select('nombre, stock')
+      .then(({ data }) => {
+        if (!data) return;
+        setProducts((prev) =>
+          prev.map((p) => {
+            const row = data.find((r) => NOMBRE_TO_ID[r.nombre] === p.id);
+            return row ? { ...p, stock: row.stock } : p;
+          }),
+        );
+      });
+  }, []);
+
+  useEffect(() => {
+    if (selectedProduct) {
+      const fresh = products.find((p) => p.id === selectedProduct.id);
+      if (fresh && fresh.stock !== selectedProduct.stock) {
+        setSelectedProduct(fresh);
+      }
+    }
+  }, [products, selectedProduct]);
 
   const handleIntroComplete = useCallback(() => {
     setScreen('catalog');
@@ -189,7 +220,7 @@ export default function App() {
 
       {screen === 'catalog' && (
         <CatalogScreen
-          products={PRODUCTS}
+          products={products}
           onProductClick={handleProductClick}
         />
       )}
