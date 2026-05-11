@@ -197,13 +197,13 @@ function Step2Molienda({
           <RadioOption
             selected={orderData.grindType === 'grano'}
             title="Grano"
+            badge="Recomendado"
             description="Ideal si tienes molino en casa y te gusta disfrutar el café bien fresco."
             onClick={() => setOrderData((d) => ({ ...d, grindType: 'grano' }))}
           />
           <RadioOption
             selected={orderData.grindType === 'media'}
             title="Media"
-            badge="Recomendado"
             description="Perfecta para métodos de goteo, chemex, V60 o cafetera eléctrica."
             onClick={() => setOrderData((d) => ({ ...d, grindType: 'media' }))}
           />
