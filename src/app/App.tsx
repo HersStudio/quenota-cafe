@@ -216,6 +216,19 @@ export default function App() {
     setScreen('catalog');
   }, []);
 
+  const handleLogoClick = useCallback(() => {
+    setSelectedProduct(null);
+    setShowPurchasePanel(false);
+    setPurchaseStep(1);
+    setIsNextDispatch(false);
+    setOrderData({
+      size: null, grindType: null, quantity: 1,
+      city: '', address: '', neighborhood: '', details: '',
+      paymentMethod: null,
+    });
+    setScreen('intro');
+  }, []);
+
   const handleStartPurchase = useCallback(() => {
     setShowPurchasePanel(true);
     setPurchaseStep(1);
@@ -270,6 +283,7 @@ export default function App() {
         <CatalogScreen
           products={products}
           onProductClick={handleProductClick}
+          onLogoClick={handleLogoClick}
         />
       )}
 
@@ -279,6 +293,7 @@ export default function App() {
             product={selectedProduct}
             onBack={handleBackToCatalog}
             onStartPurchase={handleStartPurchase}
+            onLogoClick={handleLogoClick}
           />
           {showPurchasePanel && (
             <PurchasePanel

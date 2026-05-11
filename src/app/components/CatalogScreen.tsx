@@ -5,6 +5,7 @@ import imgBrand from '../../assets/237da3dee3ae12b13b13dd5e870e2ac0ba3753ec.png'
 interface CatalogScreenProps {
   products: Product[];
   onProductClick: (product: Product) => void;
+  onLogoClick: () => void;
 }
 
 function StockBadge({ stock }: { stock: number }) {
@@ -139,6 +140,7 @@ function ProductCard({
 export default function CatalogScreen({
   products,
   onProductClick,
+  onLogoClick,
 }: CatalogScreenProps) {
   return (
     <div className="min-h-dvh overflow-x-hidden" style={{ backgroundColor: '#F2E8E0' }}>
@@ -146,7 +148,8 @@ export default function CatalogScreen({
         <img
           src={imgBrand}
           alt="Qué Nota Café"
-          className="h-[36px] lg:h-[44px] object-contain"
+          className="h-[36px] lg:h-[44px] object-contain cursor-pointer"
+          onClick={onLogoClick}
         />
         <p
           className="hidden lg:block text-[14px] font-bold uppercase tracking-[0.1em]"

@@ -6,6 +6,7 @@ interface ProductDetailProps {
   product: Product;
   onBack: () => void;
   onStartPurchase: () => void;
+  onLogoClick: () => void;
 }
 
 function CharacteristicsTable({ product }: { product: Product }) {
@@ -98,7 +99,7 @@ function InfoSection() {
   );
 }
 
-export default function ProductDetail({ product, onBack, onStartPurchase }: ProductDetailProps) {
+export default function ProductDetail({ product, onBack, onStartPurchase, onLogoClick }: ProductDetailProps) {
   return (
     <div className="min-h-dvh" style={{ backgroundColor: '#F2E8E0' }}>
       <div className="lg:grid lg:grid-cols-2 lg:h-dvh">
@@ -108,8 +109,9 @@ export default function ProductDetail({ product, onBack, onStartPurchase }: Prod
             <img
               src={imgBrand}
               alt="Qué Nota Café"
-              className="h-[36px] lg:h-[44px] object-contain"
+              className="h-[36px] lg:h-[44px] object-contain cursor-pointer"
               style={{ filter: 'brightness(0) invert(1)' }}
+              onClick={onLogoClick}
             />
           </div>
 
