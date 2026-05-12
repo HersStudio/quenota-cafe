@@ -28,27 +28,44 @@ export default async function handler(req: IncomingMessage, res: ServerResponse)
     return;
   }
 
+  const amountInCents = Math.round(amount * 100);
+
+  const boldPayload = {
+    amount_type: 'CLOSE',
+    amount: {
+      currency: 'COP',
+      total_amount: amountInCents,
+      tip_amount: 0,
+    },
+    description,
+    reference,
+  };
+
+  console.log('[Bold] Request payload:', JSON.stringify(boldPayload));
+
   const response = await fetch('https://payments.api.bold.co/v2/payment-voucher/link', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `x-api-key ${apiKey}`,
     },
-    body: JSON.stringify({
-      amount_type: 'CLOSE',
-      amount: {
-        currency: 'COP',
-        total_amount: amount,
-        tip_amount: 0,
-      },
-      description,
-      reference,
-    }),
+    body: JSON.stringify(boldPayload),
   });
 
-  const data = await response.json();
+  const responseText = await response.text();
+  console.log('[Bold] Status:', response.status);
+  console.log('[Bold] Response:', responseText);
+
+  let data;
+  try {
+    data = JSON.parse(responseText);
+  } catch {
+    res.statusCode = 502;
+    res.end(JSON.stringify({ error: 'Invalid response from Bold', raw: responseText }));
+    return;
+  }
 
   res.statusCode = response.ok ? 200 : response.status;
   res.setHeader('Content-Type', 'application/json');
-  res.end(JSON.stringify(response.ok ? data : { error: data }));
+  res.end(JSON.stringify(response.ok ? data : { error: data, status: response.status }));
 }
