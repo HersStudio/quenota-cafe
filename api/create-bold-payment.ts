@@ -3,9 +3,9 @@ export default async function handler(req: any, res: any) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { description, amount, reference } = req.body;
+  const { description, amount, orderId } = req.body;
 
-  if (!description || !amount || !reference) {
+  if (!description || !amount || !orderId) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
 
@@ -24,7 +24,7 @@ export default async function handler(req: any, res: any) {
       tip_amount: 0,
     },
     description,
-    reference,
+    reference: orderId,
   };
 
   console.log('[Bold] Request payload:', JSON.stringify(boldPayload));
@@ -53,5 +53,6 @@ export default async function handler(req: any, res: any) {
     return res.status(response.status).json({ error: data, status: response.status });
   }
 
-  return res.status(200).json(data);
+  const paymentUrl = data.url || data.payment_url || data.redirect_url;
+  return res.status(200).json({ payment_url: paymentUrl, ...data });
 }
