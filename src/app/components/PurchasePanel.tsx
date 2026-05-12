@@ -14,6 +14,7 @@ interface PurchasePanelProps {
   getTotalPrice: () => number;
   getGrindLabel: (grind: string | null) => string;
   onWhatsApp: () => void;
+  onBoldPayment: () => void;
 }
 
 function RadioOption({
@@ -367,6 +368,7 @@ function Step5Summary({
   getTotalPrice,
   getGrindLabel,
   onWhatsApp,
+  onBoldPayment,
   onEditAddress,
   onEditPayment,
   onEditProduct,
@@ -379,6 +381,7 @@ function Step5Summary({
   getTotalPrice: () => number;
   getGrindLabel: (grind: string | null) => string;
   onWhatsApp: () => void;
+  onBoldPayment: () => void;
   onEditAddress: () => void;
   onEditPayment: () => void;
   onEditProduct: () => void;
@@ -474,7 +477,7 @@ function Step5Summary({
       {/* CTA */}
       {isOnline ? (
         <button
-          onClick={() => { /* MercadoPago — se configura después */ }}
+          onClick={onBoldPayment}
           className="w-full text-[14px] font-bold uppercase tracking-[0.05em] py-4 rounded-full transition-colors"
           style={{ backgroundColor: '#1E1E1E', color: '#FFFFFF' }}
           onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#2D2D2D')}
@@ -509,6 +512,7 @@ export default function PurchasePanel({
   getTotalPrice,
   getGrindLabel,
   onWhatsApp,
+  onBoldPayment,
 }: PurchasePanelProps) {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -596,6 +600,7 @@ export default function PurchasePanel({
             getTotalPrice={getTotalPrice}
             getGrindLabel={getGrindLabel}
             onWhatsApp={onWhatsApp}
+            onBoldPayment={onBoldPayment}
             onEditAddress={() => setStep(3)}
             onEditPayment={() => setStep(4)}
             onEditProduct={() => setStep(1)}

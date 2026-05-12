@@ -273,6 +273,30 @@ export default function App() {
     window.open(`https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=${message}`, '_blank');
   };
 
+  const handleBoldPayment = async () => {
+    if (!selectedProduct) return;
+    const grindLabel = getGrindLabel(orderData.grindType);
+    const sizeLabel = orderData.size === '250g' ? '250g' : '500g';
+    const total = getTotalPrice();
+    const description = `${selectedProduct.name} - ${sizeLabel} x${orderData.quantity} - Molienda: ${grindLabel}`;
+    const reference = `QN-${selectedProduct.id}-${Date.now()}`;
+
+    try {
+      const res = await fetch('/api/create-bold-payment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ description, amount: total, reference }),
+      });
+      const data = await res.json();
+      const paymentUrl = data?.payload?.url || data?.url;
+      if (paymentUrl) {
+        window.location.href = paymentUrl;
+      }
+    } catch {
+      // Silently fail — user can retry
+    }
+  };
+
   return (
     <div className="min-h-dvh">
       {screen === 'intro' && (
@@ -308,6 +332,7 @@ export default function App() {
               getTotalPrice={getTotalPrice}
               getGrindLabel={getGrindLabel}
               onWhatsApp={handleWhatsAppClick}
+              onBoldPayment={handleBoldPayment}
             />
           )}
         </div>
