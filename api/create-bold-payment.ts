@@ -16,25 +16,16 @@ export default async function handler(req: Request) {
     return new Response(JSON.stringify({ error: 'Bold API key not configured' }), { status: 500 });
   }
 
-  const amountInCents = Math.round(amount * 100);
-
   const boldPayload = {
     amount_type: 'CLOSE',
-    amount: {
-      currency: 'COP',
-      total_amount: amountInCents,
-      tip_amount: 0,
-    },
+    amount: Math.round(amount),
+    currency: 'COP',
     description,
     reference,
   };
 
-  console.log('[Bold] Request URL:', 'https://payments.api.bold.co/v2/payment-voucher/link');
-  console.log('[Bold] Request headers:', JSON.stringify({
-    'Content-Type': 'application/json',
-    'Authorization': `x-api-key ${apiKey.substring(0, 8)}...`,
-  }));
   console.log('[Bold] Request payload:', JSON.stringify(boldPayload));
+  console.log('[Bold] Auth header:', `x-api-key ${apiKey.substring(0, 8)}...`);
 
   const response = await fetch('https://payments.api.bold.co/v2/payment-voucher/link', {
     method: 'POST',
@@ -73,7 +64,7 @@ export default async function handler(req: Request) {
   }
 
   return new Response(
-    JSON.stringify(response.ok ? data : { error: data, status: response.status }),
-    { status: response.ok ? 200 : response.status, headers: { 'Content-Type': 'application/json' } },
+    JSON.stringify(data),
+    { status: 200, headers: { 'Content-Type': 'application/json' } },
   );
 }
