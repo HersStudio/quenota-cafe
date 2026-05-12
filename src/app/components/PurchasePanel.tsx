@@ -385,28 +385,28 @@ function Step5Summary({
 }) {
   const paymentLabels: Record<string, string> = { breb: 'Bre-B', efectivo: 'Efectivo', online: 'Pago en línea' };
   const isOnline = orderData.paymentMethod === 'online';
+  const boldContainerRef = React.useRef<HTMLDivElement>(null);
 
-  const handleBoldPayment = () => {
-    const existing = document.querySelector('script[data-bold-button]');
+  useEffect(() => {
+    if (!isOnline) return;
+
+    const existing = document.querySelector('script[src*="bold-checkout"]');
     if (existing) existing.remove();
-
-    const sizeLabel = orderData.size === '250g' ? '250g' : '500g';
-    const grindLabel = getGrindLabel(orderData.grindType);
-    const description = `${product.name} - ${sizeLabel} x${orderData.quantity} - Molienda: ${grindLabel}`;
-    const reference = `QN-${product.id}-${Date.now()}`;
 
     const script = document.createElement('script');
     script.src = 'https://checkout.bold.co/library/bold-checkout.js';
-    script.setAttribute('data-bold-button', '');
-    script.setAttribute('data-api-key', import.meta.env.VITE_BOLD_API_KEY);
-    script.setAttribute('data-amount', String(getTotalPrice()));
-    script.setAttribute('data-currency', 'COP');
-    script.setAttribute('data-description', description);
-    script.setAttribute('data-reference', reference);
-    script.setAttribute('data-redirection-url', 'https://quenotacafe.com/pago-exitoso');
-    script.setAttribute('data-render-mode', 'embedded');
+    script.async = true;
     document.body.appendChild(script);
-  };
+
+    return () => {
+      script.remove();
+    };
+  }, [isOnline, orderData.quantity, orderData.size, orderData.grindType]);
+
+  const sizeLabel = orderData.size === '250g' ? '250g' : '500g';
+  const grindLabel = getGrindLabel(orderData.grindType);
+  const boldDescription = `${product.name} - ${sizeLabel} x${orderData.quantity} - Molienda: ${grindLabel}`;
+  const boldReference = `QN-${product.id}-${Date.now()}`;
 
   return (
     <div className="flex flex-col h-full">
@@ -495,15 +495,19 @@ function Step5Summary({
 
       {/* CTA */}
       {isOnline ? (
-        <button
-          onClick={handleBoldPayment}
-          className="w-full text-[14px] font-bold uppercase tracking-[0.05em] py-4 rounded-full transition-colors"
+        <div
+          ref={boldContainerRef}
+          data-bold-button
+          data-api-key={import.meta.env.VITE_BOLD_API_KEY}
+          data-amount={String(getTotalPrice())}
+          data-currency="COP"
+          data-description={boldDescription}
+          data-reference={boldReference}
+          data-redirection-url="https://quenotacafe.com/pago-exitoso"
+          data-render-mode="embedded"
+          className="w-full text-[14px] font-bold uppercase tracking-[0.05em] py-4 rounded-full text-center cursor-pointer transition-colors"
           style={{ backgroundColor: '#1E1E1E', color: '#FFFFFF' }}
-          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#2D2D2D')}
-          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#1E1E1E')}
-        >
-          IR A PAGAR
-        </button>
+        />
       ) : (
         <button
           onClick={onWhatsApp}
