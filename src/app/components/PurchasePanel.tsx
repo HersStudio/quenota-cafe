@@ -14,7 +14,6 @@ interface PurchasePanelProps {
   getTotalPrice: () => number;
   getGrindLabel: (grind: string | null) => string;
   onWhatsApp: () => void;
-  onBoldPayment: () => void;
 }
 
 function RadioOption({
@@ -368,7 +367,6 @@ function Step5Summary({
   getTotalPrice,
   getGrindLabel,
   onWhatsApp,
-  onBoldPayment,
   onEditAddress,
   onEditPayment,
   onEditProduct,
@@ -381,13 +379,34 @@ function Step5Summary({
   getTotalPrice: () => number;
   getGrindLabel: (grind: string | null) => string;
   onWhatsApp: () => void;
-  onBoldPayment: () => void;
   onEditAddress: () => void;
   onEditPayment: () => void;
   onEditProduct: () => void;
 }) {
   const paymentLabels: Record<string, string> = { breb: 'Bre-B', efectivo: 'Efectivo', online: 'Pago en línea' };
   const isOnline = orderData.paymentMethod === 'online';
+
+  const handleBoldPayment = () => {
+    const existing = document.querySelector('script[data-bold-button]');
+    if (existing) existing.remove();
+
+    const sizeLabel = orderData.size === '250g' ? '250g' : '500g';
+    const grindLabel = getGrindLabel(orderData.grindType);
+    const description = `${product.name} - ${sizeLabel} x${orderData.quantity} - Molienda: ${grindLabel}`;
+    const reference = `QN-${product.id}-${Date.now()}`;
+
+    const script = document.createElement('script');
+    script.src = 'https://checkout.bold.co/library/bold-checkout.js';
+    script.setAttribute('data-bold-button', '');
+    script.setAttribute('data-api-key', import.meta.env.VITE_BOLD_API_KEY);
+    script.setAttribute('data-amount', String(getTotalPrice()));
+    script.setAttribute('data-currency', 'COP');
+    script.setAttribute('data-description', description);
+    script.setAttribute('data-reference', reference);
+    script.setAttribute('data-redirection-url', 'https://quenotacafe.com/pago-exitoso');
+    script.setAttribute('data-render-mode', 'embedded');
+    document.body.appendChild(script);
+  };
 
   return (
     <div className="flex flex-col h-full">
@@ -477,7 +496,7 @@ function Step5Summary({
       {/* CTA */}
       {isOnline ? (
         <button
-          onClick={onBoldPayment}
+          onClick={handleBoldPayment}
           className="w-full text-[14px] font-bold uppercase tracking-[0.05em] py-4 rounded-full transition-colors"
           style={{ backgroundColor: '#1E1E1E', color: '#FFFFFF' }}
           onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#2D2D2D')}
@@ -512,7 +531,6 @@ export default function PurchasePanel({
   getTotalPrice,
   getGrindLabel,
   onWhatsApp,
-  onBoldPayment,
 }: PurchasePanelProps) {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -600,7 +618,6 @@ export default function PurchasePanel({
             getTotalPrice={getTotalPrice}
             getGrindLabel={getGrindLabel}
             onWhatsApp={onWhatsApp}
-            onBoldPayment={onBoldPayment}
             onEditAddress={() => setStep(3)}
             onEditPayment={() => setStep(4)}
             onEditProduct={() => setStep(1)}
