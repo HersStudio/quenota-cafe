@@ -29,6 +29,11 @@ export default async function handler(req: Request) {
     reference,
   };
 
+  console.log('[Bold] Request URL:', 'https://payments.api.bold.co/v2/payment-voucher/link');
+  console.log('[Bold] Request headers:', JSON.stringify({
+    'Content-Type': 'application/json',
+    'Authorization': `x-api-key ${apiKey.substring(0, 8)}...`,
+  }));
   console.log('[Bold] Request payload:', JSON.stringify(boldPayload));
 
   const response = await fetch('https://payments.api.bold.co/v2/payment-voucher/link', {
@@ -41,8 +46,24 @@ export default async function handler(req: Request) {
   });
 
   const responseText = await response.text();
-  console.log('[Bold] Status:', response.status);
-  console.log('[Bold] Response:', responseText);
+  const responseHeaders: Record<string, string> = {};
+  response.headers.forEach((value, key) => { responseHeaders[key] = value; });
+
+  console.log('[Bold] Response status:', response.status);
+  console.log('[Bold] Response headers:', JSON.stringify(responseHeaders));
+  console.log('[Bold] Response body:', responseText);
+
+  if (!response.ok) {
+    return new Response(
+      JSON.stringify({
+        error: 'Bold API error',
+        status: response.status,
+        headers: responseHeaders,
+        body: responseText,
+      }),
+      { status: response.status, headers: { 'Content-Type': 'application/json' } },
+    );
+  }
 
   let data;
   try {
