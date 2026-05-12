@@ -1,19 +1,31 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
+import type { IncomingMessage, ServerResponse } from 'http';
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function handler(req: IncomingMessage, res: ServerResponse) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+    res.statusCode = 405;
+    res.end(JSON.stringify({ error: 'Method not allowed' }));
+    return;
   }
 
-  const { description, amount, reference } = req.body;
+  const body = await new Promise<string>((resolve) => {
+    let data = '';
+    req.on('data', (chunk: Buffer) => { data += chunk; });
+    req.on('end', () => resolve(data));
+  });
+
+  const { description, amount, reference } = JSON.parse(body);
 
   if (!description || !amount || !reference) {
-    return res.status(400).json({ error: 'Missing required fields' });
+    res.statusCode = 400;
+    res.end(JSON.stringify({ error: 'Missing required fields' }));
+    return;
   }
 
   const apiKey = process.env.BOLD_API_KEY;
   if (!apiKey) {
-    return res.status(500).json({ error: 'Bold API key not configured' });
+    res.statusCode = 500;
+    res.end(JSON.stringify({ error: 'Bold API key not configured' }));
+    return;
   }
 
   const response = await fetch('https://payments.api.bold.co/v2/payment-voucher/link', {
@@ -36,9 +48,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   const data = await response.json();
 
-  if (!response.ok) {
-    return res.status(response.status).json({ error: data });
-  }
-
-  return res.status(200).json(data);
+  res.statusCode = response.ok ? 200 : response.status;
+  res.setHeader('Content-Type', 'application/json');
+  res.end(JSON.stringify(response.ok ? data : { error: data }));
 }
