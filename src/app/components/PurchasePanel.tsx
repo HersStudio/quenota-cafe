@@ -490,13 +490,27 @@ function Step5Summary({
 
       {/* CTA */}
       <button
-        onClick={isOnline ? handleBoldPayment : () => window.open('https://wa.me/573209028644', '_blank')}
+        onClick={isOnline ? handleBoldPayment : () => {
+          const sizeLabel = orderData.size === '250g' ? '250' : '500';
+          const grindLabel = getGrindLabel(orderData.grindType);
+          const message = encodeURIComponent(
+            `Hola! 👋 Quiero confirmar mi pedido de QUÉ NOTA:\n\n` +
+            `☕ ${product.name}\n` +
+            `⚖️ Gramaje: ${sizeLabel}g\n` +
+            `🫘 Molienda: ${grindLabel}\n` +
+            `💰 Total: $${getTotalPrice().toLocaleString()} (incluye domicilio)\n` +
+            `📍 Dirección: ${orderData.address}, ${orderData.neighborhood}, ${orderData.city}\n` +
+            `💳 Método de pago: ${paymentLabels[orderData.paymentMethod!]}\n\n` +
+            `¿Cómo coordinamos?`
+          );
+          window.open(`https://wa.me/573209028644?text=${message}`, '_blank');
+        }}
         className="w-full text-[14px] font-bold uppercase tracking-[0.05em] py-4 rounded-full transition-colors"
         style={{ backgroundColor: '#1E1E1E', color: '#F2E8E0' }}
         onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#2D2D2D')}
         onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#1E1E1E')}
       >
-        IR A PAGAR
+        {isOnline ? 'IR A PAGAR' : 'CONFIRMAR POR WHATSAPP'}
       </button>
     </div>
   );
