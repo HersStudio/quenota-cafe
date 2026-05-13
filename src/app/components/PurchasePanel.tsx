@@ -333,6 +333,12 @@ function Step4Payment({
         </p>
         <div className="space-y-4 mb-8">
           <RadioOption
+            selected={orderData.paymentMethod === 'breb'}
+            title="Bre-B"
+            description="Te compartiremos nuestra llave para el pago."
+            onClick={() => setOrderData((d) => ({ ...d, paymentMethod: 'breb' }))}
+          />
+          <RadioOption
             selected={orderData.paymentMethod === 'efectivo'}
             title="Efectivo"
             description="Paga al recibir tu pedido en casa."
@@ -376,7 +382,7 @@ function Step5Summary({
   onEditPayment: () => void;
   onEditProduct: () => void;
 }) {
-  const paymentLabels: Record<string, string> = { efectivo: 'Efectivo', online: 'Pago en línea' };
+  const paymentLabels: Record<string, string> = { breb: 'Bre-B', efectivo: 'Efectivo', online: 'Pago en línea' };
   const isOnline = orderData.paymentMethod === 'online';
 
   const handleBoldPayment = async () => {
