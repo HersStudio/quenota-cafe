@@ -333,13 +333,6 @@ function Step4Payment({
         </p>
         <div className="space-y-4 mb-8">
           <RadioOption
-            selected={orderData.paymentMethod === 'breb'}
-            title="Bre-B"
-            badge="Recomendado"
-            description="Te compartiremos nuestra llave para el pago."
-            onClick={() => setOrderData((d) => ({ ...d, paymentMethod: 'breb' }))}
-          />
-          <RadioOption
             selected={orderData.paymentMethod === 'efectivo'}
             title="Efectivo"
             description="Paga al recibir tu pedido en casa."
@@ -486,27 +479,21 @@ function Step5Summary({
       </div>
 
       {/* CTA */}
-      {isOnline ? (
-        <button
-          onClick={handleBoldPayment}
-          className="w-full text-[14px] font-bold uppercase tracking-[0.05em] py-4 rounded-full transition-colors"
-          style={{ backgroundColor: '#1E1E1E', color: '#F2E8E0' }}
-          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#2D2D2D')}
-          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#1E1E1E')}
-        >
-          IR A PAGAR
-        </button>
-      ) : (
-        <button
-          onClick={onWhatsApp}
-          className="w-full text-[14px] font-bold uppercase tracking-[0.05em] py-4 rounded-full transition-colors"
-          style={{ backgroundColor: '#1E1E1E', color: '#FFFFFF' }}
-          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#2D2D2D')}
-          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#1E1E1E')}
-        >
-          FINALIZAR PEDIDO POR WHATSAPP
-        </button>
-      )}
+      <button
+        onClick={() => {
+          if (isOnline) {
+            handleBoldPayment();
+          } else {
+            window.open('https://wa.me/573209028644', '_blank');
+          }
+        }}
+        className="w-full text-[14px] font-bold uppercase tracking-[0.05em] py-4 rounded-full transition-colors"
+        style={{ backgroundColor: '#1E1E1E', color: '#F2E8E0' }}
+        onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#2D2D2D')}
+        onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#1E1E1E')}
+      >
+        IR A PAGAR
+      </button>
     </div>
   );
 }
