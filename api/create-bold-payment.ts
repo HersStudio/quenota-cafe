@@ -33,7 +33,7 @@ export default async function handler(req: any, res: any) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `x-api-key ${apiKey}`,
+      'Authorization': 'Basic ' + btoa(`${process.env.BOLD_API_KEY}:${process.env.BOLD_SECRET_KEY}`),
     },
     body: JSON.stringify(boldPayload),
   });
