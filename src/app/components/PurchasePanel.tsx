@@ -387,7 +387,7 @@ function Step5Summary({
 
   const handleBoldPayment = async () => {
     try {
-      const res = await fetch('/api/create-bold-payment', {
+      const res = await fetch('/api/create-payment', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
