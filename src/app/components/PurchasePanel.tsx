@@ -14,6 +14,7 @@ interface PurchasePanelProps {
   getTotalPrice: () => number;
   getGrindLabel: (grind: string | null) => string;
   onWhatsApp: () => void;
+  onBoldPayment: () => void;
 }
 
 function RadioOption({
@@ -333,6 +334,13 @@ function Step4Payment({
         </p>
         <div className="space-y-4 mb-8">
           <RadioOption
+            selected={orderData.paymentMethod === 'breb'}
+            title="Bre-B"
+            badge="Recomendado"
+            description="Te compartiremos nuestra llave para el pago."
+            onClick={() => setOrderData((d) => ({ ...d, paymentMethod: 'breb' }))}
+          />
+          <RadioOption
             selected={orderData.paymentMethod === 'efectivo'}
             title="Efectivo"
             description="Paga al recibir tu pedido en casa."
@@ -360,6 +368,7 @@ function Step5Summary({
   getTotalPrice,
   getGrindLabel,
   onWhatsApp,
+  onBoldPayment,
   onEditAddress,
   onEditPayment,
   onEditProduct,
@@ -372,26 +381,13 @@ function Step5Summary({
   getTotalPrice: () => number;
   getGrindLabel: (grind: string | null) => string;
   onWhatsApp: () => void;
+  onBoldPayment: () => void;
   onEditAddress: () => void;
   onEditPayment: () => void;
   onEditProduct: () => void;
 }) {
   const paymentLabels: Record<string, string> = { breb: 'Bre-B', efectivo: 'Efectivo', online: 'Pago en línea' };
   const isOnline = orderData.paymentMethod === 'online';
-
-  const handleBoldPayment = async () => {
-    const sizeLabel = orderData.size === '250g' ? '250g' : '500g';
-    const grindLabel = getGrindLabel(orderData.grindType);
-    const description = `${product.name} - ${sizeLabel} x${orderData.quantity} - Molienda: ${grindLabel}`;
-    const orderId = `QN-${product.id}-${Date.now()}`;
-    const res = await fetch('/api/create-bold-payment', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ amount: getTotalPrice(), description, orderId }),
-    });
-    const data = await res.json();
-    if (data.payment_url) window.open(data.payment_url, '_blank');
-  };
 
   return (
     <div className="flex flex-col h-full">
@@ -479,21 +475,27 @@ function Step5Summary({
       </div>
 
       {/* CTA */}
-      <button
-        onClick={() => {
-          if (isOnline) {
-            handleBoldPayment();
-          } else {
-            window.open('https://wa.me/573209028644', '_blank');
-          }
-        }}
-        className="w-full text-[14px] font-bold uppercase tracking-[0.05em] py-4 rounded-full transition-colors"
-        style={{ backgroundColor: '#1E1E1E', color: '#F2E8E0' }}
-        onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#2D2D2D')}
-        onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#1E1E1E')}
-      >
-        IR A PAGAR
-      </button>
+      {isOnline ? (
+        <button
+          onClick={onBoldPayment}
+          className="w-full text-[14px] font-bold uppercase tracking-[0.05em] py-4 rounded-full transition-colors"
+          style={{ backgroundColor: '#1E1E1E', color: '#FFFFFF' }}
+          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#2D2D2D')}
+          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#1E1E1E')}
+        >
+          IR A PAGAR
+        </button>
+      ) : (
+        <button
+          onClick={onWhatsApp}
+          className="w-full text-[14px] font-bold uppercase tracking-[0.05em] py-4 rounded-full transition-colors"
+          style={{ backgroundColor: '#1E1E1E', color: '#FFFFFF' }}
+          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#2D2D2D')}
+          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#1E1E1E')}
+        >
+          FINALIZAR PEDIDO POR WHATSAPP
+        </button>
+      )}
     </div>
   );
 }
@@ -510,6 +512,7 @@ export default function PurchasePanel({
   getTotalPrice,
   getGrindLabel,
   onWhatsApp,
+  onBoldPayment,
 }: PurchasePanelProps) {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -597,6 +600,7 @@ export default function PurchasePanel({
             getTotalPrice={getTotalPrice}
             getGrindLabel={getGrindLabel}
             onWhatsApp={onWhatsApp}
+            onBoldPayment={onBoldPayment}
             onEditAddress={() => setStep(3)}
             onEditPayment={() => setStep(4)}
             onEditProduct={() => setStep(1)}
