@@ -385,8 +385,9 @@ function Step5Summary({
   const paymentLabels: Record<string, string> = { breb: 'Bre-B', efectivo: 'Efectivo', online: 'Pago en línea' };
   const isOnline = orderData.paymentMethod === 'online';
 
-  const handleBoldPayment = async () => {
+  const handleOnlinePayment = async () => {
     try {
+      const sizeLabel = orderData.size === '250g' ? '250' : '500';
       const res = await fetch('/api/create-payment', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -394,12 +395,17 @@ function Step5Summary({
           amount: getTotalPrice(),
           description: `Pedido Qué Nota Café - ${product.name}`,
           orderId: `QN-${Date.now()}`,
+          weight: sizeLabel,
+          grind: getGrindLabel(orderData.grindType),
+          address: orderData.address,
+          neighborhood: orderData.neighborhood,
+          city: orderData.city,
         }),
       });
       const data = await res.json();
       if (data.payment_url) window.open(data.payment_url, '_blank');
     } catch (e) {
-      console.error('Error Bold:', e);
+      console.error('Error payment:', e);
     }
   };
 
@@ -490,7 +496,7 @@ function Step5Summary({
 
       {/* CTA */}
       <button
-        onClick={isOnline ? handleBoldPayment : () => {
+        onClick={isOnline ? handleOnlinePayment : () => {
           const sizeLabel = orderData.size === '250g' ? '250' : '500';
           const grindLabel = getGrindLabel(orderData.grindType);
           const message = encodeURIComponent(

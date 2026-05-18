@@ -2,6 +2,7 @@ export default async function handler(req: any, res: any) {
   if (req.method !== 'POST') return res.status(405).end();
 
   const { amount, description, orderId } = req.body;
+  const reference = orderId || `QN-${Date.now()}`;
 
   const response = await fetch('https://api.mercadopago.com/checkout/preferences', {
     method: 'POST',
@@ -16,7 +17,17 @@ export default async function handler(req: any, res: any) {
         unit_price: amount,
         currency_id: 'COP',
       }],
-      external_reference: orderId || `QN-${Date.now()}`,
+      external_reference: JSON.stringify({
+        orderId: reference,
+        productName: description,
+        weight: req.body.weight,
+        grind: req.body.grind,
+        address: req.body.address,
+        neighborhood: req.body.neighborhood,
+        city: req.body.city,
+        paymentMethod: 'Pago en línea',
+        total: amount,
+      }),
       back_urls: {
         success: 'https://quenotacafe.com',
         failure: 'https://quenotacafe.com',

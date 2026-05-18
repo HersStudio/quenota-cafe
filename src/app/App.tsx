@@ -6,6 +6,7 @@ import CatalogScreen from './components/CatalogScreen';
 import ProductDetail from './components/ProductDetail';
 import PurchasePanel from './components/PurchasePanel';
 import OutOfStockModal from './components/OutOfStockModal';
+import SuccessScreen from './components/SuccessScreen';
 
 export interface Product {
   id: string;
@@ -41,7 +42,7 @@ export interface OrderData {
   paymentMethod: 'breb' | 'efectivo' | 'online' | null;
 }
 
-export type Screen = 'intro' | 'catalog' | 'detail' | 'purchase';
+export type Screen = 'intro' | 'catalog' | 'detail' | 'purchase' | 'success';
 
 const NOMBRE_TO_ID: Record<string, string> = {
   'Bourbon Rosado': 'bourbon-rosado',
@@ -119,7 +120,10 @@ function getNextDispatchDate(): string {
 
 export default function App() {
   const [products, setProducts] = useState<Product[]>(DEFAULT_PRODUCTS);
-  const [screen, setScreen] = useState<Screen>('intro');
+  const [screen, setScreen] = useState<Screen>(() => {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('status') && params.get('external_reference') ? 'success' : 'intro';
+  });
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [showPurchasePanel, setShowPurchasePanel] = useState(false);
   const [purchaseStep, setPurchaseStep] = useState(1);
@@ -275,6 +279,10 @@ export default function App() {
 
   return (
     <div className="min-h-dvh">
+      {screen === 'success' && (
+        <SuccessScreen logo={imgBrand} />
+      )}
+
       {screen === 'intro' && (
         <IntroScreen logo={imgBrand} onComplete={handleIntroComplete} />
       )}
