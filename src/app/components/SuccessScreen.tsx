@@ -17,7 +17,7 @@ export default function SuccessScreen({ logo }: { logo: string }) {
 
   let order: OrderInfo | null = null;
   try {
-    if (externalRef) order = JSON.parse(externalRef);
+    if (externalRef) order = JSON.parse(decodeURIComponent(externalRef));
   } catch {
     order = null;
   }
@@ -99,7 +99,7 @@ export default function SuccessScreen({ logo }: { logo: string }) {
         onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#2D2D2D')}
         onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#1E1E1E')}
       >
-        CONFIRMAR POR WHATSAPP
+        NOTIFICAR AL VENDEDOR
       </button>
     </div>
   );
