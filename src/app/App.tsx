@@ -84,7 +84,7 @@ const DEFAULT_PRODUCTS: Product[] = [
     stock: 30,
     price250: 47900,
     price500: 85000,
-    isSpecialEdition: true,
+    isSpecialEdition: false,
     characteristics: {
       region: 'Caicedonia, Valle del Cauca',
       altitude: '1.800 msnm',

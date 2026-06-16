@@ -164,7 +164,7 @@ export default function CatalogScreen({
           className={`grid gap-10 lg:gap-14 ${
             products.length === 1
               ? 'grid-cols-1 max-w-[560px]'
-              : 'grid-cols-1 lg:grid-cols-2'
+              : 'grid-cols-1 lg:grid-cols-3'
           }`}
         >
           {products.map((product) => (
