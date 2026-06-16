@@ -67,7 +67,7 @@ function ProductCard({
   return (
     <div className="relative cursor-pointer group" onClick={onClick}>
       {product.isSpecialEdition && <SpecialEditionSeal />}
-      {!product.isSpecialEdition && <DecorativeBlob />}
+      {product.id === 'regional-del-valle' && <DecorativeBlob />}
 
       <div
         className="relative overflow-visible mb-5 aspect-[4/5]"
