@@ -45,11 +45,34 @@ export interface OrderData {
 export type Screen = 'intro' | 'catalog' | 'detail' | 'purchase' | 'success';
 
 const NOMBRE_TO_ID: Record<string, string> = {
+  'Bourbon Amarillo': 'bourbon-amarillo',
   'Bourbon Rosado': 'bourbon-rosado',
   'Regional del Valle': 'regional-del-valle',
 };
 
 const DEFAULT_PRODUCTS: Product[] = [
+  {
+    id: 'bourbon-amarillo',
+    name: 'BOURBON AMARILLO',
+    subtitle: 'Edición Especial de Temporada',
+    origin: 'Caicedonia, Valle del Cauca',
+    description: 'Café exótico con notas de almíbar, durazno dulce, mandarina y floral. Una acidez baja que lo hace suave y complejo, perfecto para quienes buscan una experiencia sensorial única.',
+    image: '/images/quenotacafe-bourbon-amarillo.png',
+    detailImage: '/images/quenotacafe-bourbon-amarillo-2.png',
+    stock: 30,
+    price250: 47900,
+    price500: 85000,
+    isSpecialEdition: true,
+    characteristics: {
+      region: 'Caicedonia, Valle del Cauca, Colombia',
+      altitude: '1.650 MSNM',
+      variety: 'Bourbon Amarillo',
+      processing: 'Lavado',
+      sensoryProfile: 'Almíbar, Durazno Dulce, Mandarina, Frutal Jugoso y Floral',
+      acidity: 'Baja',
+      cuppingScore: '87',
+    },
+  },
   {
     id: 'bourbon-rosado',
     name: 'BOURBON ROSADO',
