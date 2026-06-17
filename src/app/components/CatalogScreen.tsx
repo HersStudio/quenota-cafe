@@ -159,7 +159,7 @@ export default function CatalogScreen({
         </p>
       </header>
 
-      <main className="max-w-6xl mx-auto px-8 pt-4 lg:pt-8 pb-16 lg:pb-24">
+      <main className="max-w-6xl mx-auto px-8 pt-16 lg:pt-16 pb-16 lg:pb-24">
         <div
           className={`grid gap-10 lg:gap-14 ${
             products.length === 1
