@@ -143,7 +143,7 @@ export default function CatalogScreen({
   onLogoClick,
 }: CatalogScreenProps) {
   return (
-    <div className="min-h-dvh overflow-x-hidden" style={{ backgroundColor: '#F2E8E0' }}>
+    <div className="overflow-x-hidden" style={{ backgroundColor: '#F2E8E0' }}>
       <header className="max-w-[1200px] mx-auto px-6 lg:px-10 py-6 lg:py-8 flex items-center justify-between">
         <img
           src={imgBrand}
@@ -159,7 +159,7 @@ export default function CatalogScreen({
         </p>
       </header>
 
-      <main className="max-w-6xl mx-auto px-8 pt-16 lg:pt-16 pb-16 lg:pb-24">
+      <main className="max-w-6xl mx-auto px-8 pt-16 lg:pt-16 pb-8 lg:pb-12">
         <div
           className={`grid gap-10 lg:gap-14 ${
             products.length === 1
