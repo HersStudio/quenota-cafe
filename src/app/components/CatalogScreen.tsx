@@ -31,7 +31,7 @@ function StockBadge({ stock }: { stock: number }) {
 
 function SpecialEditionSeal() {
   return (
-    <div className="absolute z-20 -left-[75px] lg:-left-[95px] top-[58%] -translate-y-1/2 pointer-events-none">
+    <div className="absolute z-20 -left-[75px] lg:-left-[95px] top-[38%] -translate-y-1/2 pointer-events-none">
       <img
         src="/images/sello-edicion-especial.png"
         alt="Edición Especial de Temporada"
@@ -161,10 +161,10 @@ export default function CatalogScreen({
 
       <main className="max-w-[1200px] mx-auto px-6 lg:px-10 pt-4 lg:pt-8 pb-16 lg:pb-24">
         <div
-          className={`grid gap-10 lg:gap-14 ${
+          className={`grid gap-10 lg:gap-14 mx-auto ${
             products.length === 1
               ? 'grid-cols-1 max-w-[560px]'
-              : 'grid-cols-1 lg:grid-cols-3'
+              : 'grid-cols-1 lg:grid-cols-3 max-w-[1100px]'
           }`}
         >
           {products.map((product) => (
