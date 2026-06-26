@@ -164,10 +164,11 @@ export default function CatalogScreen({
           className={`grid gap-10 lg:gap-14 ${
             products.length === 1
               ? 'grid-cols-1 max-w-[560px] mx-auto'
-              : 'grid-cols-1 lg:grid-cols-3'
+              : 'grid-cols-1 lg:grid-cols-2 max-w-[900px] mx-auto'
           }`}
         >
-          {products.map((product) => (
+          {/* Bourbon Rosado oculto temporalmente */}
+          {products.filter(p => p.id !== 'bourbon-rosado').map((product) => (
             <ProductCard
               key={product.id}
               product={product}
