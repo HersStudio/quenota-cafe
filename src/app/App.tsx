@@ -61,7 +61,7 @@ const DEFAULT_PRODUCTS: Product[] = [
     detailImage: '/images/quenotacafe-honey-2.png',
     stock: 30,
     price250: 43900,
-    price500: 81900,
+    price500: 79900,
     isSpecialEdition: true,
     characteristics: {
       region: 'Caicedonia, Valle del Cauca, Colombia',
