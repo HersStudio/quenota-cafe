@@ -1,4 +1,4 @@
-import Dashboard from './pages/Dashboard';
+import Dashboard from './pages/Dashboard.tsx';
 import React, { useState, useEffect, useCallback } from 'react';
 import imgBrand from '../assets/237da3dee3ae12b13b13dd5e870e2ac0ba3753ec.png';
 import { supabase } from '../lib/supabase';
