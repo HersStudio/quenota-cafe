@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import Dashboard from '../pages/Dashboard.tsx';import React, { useState, useEffect, useCallback } from 'react';
 import imgBrand from '../assets/237da3dee3ae12b13b13dd5e870e2ac0ba3753ec.png';
 import { supabase } from '../lib/supabase';
 import IntroScreen from './components/IntroScreen';
@@ -141,7 +141,10 @@ function getNextDispatchDate(): string {
   return `${DIAS[target.getDay()]} ${target.getDate()} de ${MESES[target.getMonth()]}`;
 }
 
-export default function App() {
+export default function App() {// Verificar si estamos en la ruta del dashboard
+if (window.location.pathname === '/admin/dashboard') {
+  return <Dashboard />;
+}
   const [products, setProducts] = useState<Product[]>(DEFAULT_PRODUCTS);
   const [screen, setScreen] = useState<Screen>(() => {
     const params = new URLSearchParams(window.location.search);
