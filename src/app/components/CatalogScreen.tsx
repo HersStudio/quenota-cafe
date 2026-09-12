@@ -167,8 +167,8 @@ export default function CatalogScreen({
               : 'grid-cols-1 lg:grid-cols-2 max-w-[900px] mx-auto'
           }`}
         >
-          {/* Bourbon Rosado oculto temporalmente */}
-          {products.filter(p => p.id !== 'bourbon-rosado').map((product) => (
+          {/* Honey oculto temporalmente */}
+          {products.filter(p => p.id !== 'honey').map((product) => (
             <ProductCard
               key={product.id}
               product={product}
